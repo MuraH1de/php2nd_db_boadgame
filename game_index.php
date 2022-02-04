@@ -11,7 +11,7 @@
     $status = $stmt->execute();
     $count_all = $stmt->fetch(PDO::FETCH_ASSOC);
     $count_number = intval($count_all["count(*)"]);
-    echo $count_number.'<br />';
+    //echo $count_number.'<br />';
 
     //ユーザ情報を読み込む
     $stmt = $pdo->prepare("SELECT * FROM user_table");
@@ -22,7 +22,7 @@
     }
     //echo $user_table[0]["user_name"].'<br />';
     //echo $user_table[1]["user_name"].'<br />';
-    echo $user_all.'<br />'; //全ユーザ数を確認
+    //echo $user_all.'<br />'; //全ユーザ数を確認
 
     if($count_number == 0){
         $user_id = 0;
@@ -30,7 +30,7 @@
     else{
         $user_id = $count_number % $user_all;
     }
-    echo $user_id.$user_table[$user_id]["user_name"].'<br />';
+    //echo $user_id.$user_table[$user_id]["user_name"].'<br />';
 
     $stop_status = $user_table[$user_id]["stop_status"];
 ?>

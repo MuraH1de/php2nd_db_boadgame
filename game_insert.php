@@ -1,6 +1,6 @@
 <?php
     $dice = $_POST['dice'];
-    echo 'dice=>'.$dice.'<br>';
+    //echo 'dice=>'.$dice.'<br>';
 
     try {
         //ID:'root', Password: 'root'
@@ -14,7 +14,7 @@
     $status = $stmt->execute();
     $count_all = $stmt->fetch(PDO::FETCH_ASSOC);
     $count_number = intval($count_all["count(*)"]);
-    echo 'サイコロ振った数=>'.$count_number.'<br />';
+    //echo 'サイコロ振った数=>'.$count_number.'<br />';
 
     //ユーザ情報を読み込む
     $stmt = $pdo->prepare("SELECT * FROM user_table");
@@ -25,7 +25,7 @@
     }
     //echo $user_table[0]["user_name"].'<br />';
     //echo $user_table[1]["user_name"].'<br />';
-    echo 'ユーザ数=>'.$user_all.'<br />'; //全ユーザ数
+    //echo 'ユーザ数=>'.$user_all.'<br />'; //全ユーザ数
 
     //誰の順番か判定
     if($count_number == 0){
@@ -34,7 +34,7 @@
     else{
         $user_id = $count_number % $user_all;
     }
-    echo 'user_id=>'.$user_id.'user_name=>'.$user_table[$user_id]["user_name"].'<br />';
+    //echo 'user_id=>'.$user_id.'user_name=>'.$user_table[$user_id]["user_name"].'<br />';
 
     //何ターン目か確認
     $turn = intdiv($count_number, $user_all) + 1;
@@ -59,26 +59,26 @@
     $status = $stmt->execute();
     $turn_value = $stmt->fetch(PDO::FETCH_ASSOC);
     $text = $turn_value["text"];
-    var_dump($turn_value);
-    echo '<br />';
-    echo 'bonus=>'.$turn_value["bonus"].'<br />';
-    echo 'text=>'.$text.'<br />';
+    //var_dump($turn_value);
+    //echo '<br />';
+    //echo 'bonus=>'.$turn_value["bonus"].'<br />';
+    //echo 'text=>'.$text.'<br />';
 
     //user_table 更新
     $position = $position + $dice + $turn_value["bonus"];
     if($position > 29){
         $position = 29;
     }
-    echo 'position=>'.$position.'<br />';
+    //echo 'position=>'.$position.'<br />';
     $stop_status = $turn_value["stop_status"];
-    echo 'stop_status=>'.$stop_status.'<br />';
+    //echo 'stop_status=>'.$stop_status.'<br />';
     $goal = $goal - $dice - $turn_value["bonus"];
     if($goal < 0){
         $goal = 0;
     }
-    echo 'goal=>'.$goal.'<br />';
+    //echo 'goal=>'.$goal.'<br />';
     $user_id += 1;
-    echo 'user_id=>'.$user_id.'<br />';
+    //echo 'user_id=>'.$user_id.'<br />';
     $stmt = $pdo->prepare("UPDATE  user_table SET position = :position, stop_status = :stop_status, goal = :goal  WHERE user_id = :user_id");
     $stmt->bindValue(':position', $position, PDO:: PARAM_INT);
     $stmt->bindValue(':stop_status', $stop_status, PDO:: PARAM_INT);
@@ -87,11 +87,11 @@
     $status = $stmt->execute();
 
     //game_table 更新
-    echo 'サイコロ振った数=>'.$count_number.'<br />';
-    echo '人数=>'.$user_all.'<br />';
-    echo 'ターン数=>'.$turn.'<br />';
+    //echo 'サイコロ振った数=>'.$count_number.'<br />';
+    //echo '人数=>'.$user_all.'<br />';
+    //echo 'ターン数=>'.$turn.'<br />';
     $bonus = $turn_value["bonus"];
-    echo 'position=>'.$position.'<br />';
+    //echo 'position=>'.$position.'<br />';
     $stmt = $pdo->prepare("INSERT INTO game_table(id, turn, user_id, dice, bonus, position)VALUES(NULL, :turn, :user_id, :dice, :bonus, :position)");
     $stmt->bindValue(':turn', $turn, PDO:: PARAM_INT);
     $stmt->bindValue(':user_id', $user_id, PDO:: PARAM_INT);
@@ -123,6 +123,7 @@
     
     <title>Game</title>
 </head>
+
 <body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <h1>すごろく</h1>
