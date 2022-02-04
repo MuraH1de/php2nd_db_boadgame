@@ -12,12 +12,21 @@
 
     // 1. SQL文を用意
     //$stmt = $pdo->prepare("INSERT INTO user_count(number)VALUES(:number)");
-    $stmt = $pdo->prepare("UPDATE  user_count SET number = :number");
+    $stmt = $pdo->prepare("UPDATE user_count SET number = :number");
     //  2. バインド変数を用意
     $stmt->bindValue(':number', $number, PDO:: PARAM_INT);  //Integer（数値の場合 PDO::PARAM_INT)
 
     //  3. 実行
     $status = $stmt->execute();
+
+    //user_tableの削除
+    $stmt = $pdo->prepare("TRUNCATE TABLE user_table");
+    $status = $stmt->execute();
+
+    //game_tableの削除
+    $stmt = $pdo->prepare("TRUNCATE TABLE game_table");
+    $status = $stmt->execute();
+
 
     //４．データ登録処理後
     if($status==false){

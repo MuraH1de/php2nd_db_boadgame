@@ -1,7 +1,7 @@
 <?php
     //1. POSTデータ取得
     $name = $_POST['name'];
-    echo $name.'<br>';
+    //echo $name.'<br>';
 
     //2. DB接続します
     try {
@@ -20,7 +20,7 @@
     //echo '<br />';
 
     // 1. SQL文を用意
-    $stmt = $pdo->prepare("INSERT INTO user_table(user_id, user_name, position, stop_status, goal)VALUES(NULL, :user_name, 0, 0, 0)");
+    $stmt = $pdo->prepare("INSERT INTO user_table(user_id, user_name, position, stop_status, goal)VALUES(NULL, :user_name, 0, 0, 29)");
 
     //  2. バインド変数を用意
     $stmt->bindValue(':user_name', $name, PDO:: PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
@@ -48,8 +48,14 @@
             exit;
         }
         else{
-            header("Location: user_regist.php");
-            exit;
+            if($user_number["number"] < $user_all["count(*)"]){
+                exit("Error!!");
+            }
+            else{
+                header("Location: user_regist.php");
+                exit;
+            }
+            
         }
     }
 ?>
