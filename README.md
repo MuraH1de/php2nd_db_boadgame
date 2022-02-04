@@ -13,9 +13,11 @@
 - ```user_insert.php```  <br>
     ⇒DBに名前を登録する（INSERT）
 - ```game_index.php```  <br>
+    ⇒DBからゲームの進捗を取得して表示する（SELECT）
+- ```game_insert.php```  <br>
+    ⇒DBからゲームの進捗を取得して表示する（SELECT）<br>
     ⇒DBに進んだマスの数を更新する（UPDATE）<br>
     ⇒DBにゲームの進捗を登録する（INSERT）
-    ⇒DBからゲームの進捗を取得して表示する（SELECT）
 
 
 【動作】
