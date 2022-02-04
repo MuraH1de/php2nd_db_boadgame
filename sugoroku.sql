@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: localhost:3306
--- 生成日時: 2022-02-03 17:53:02
+-- 生成日時: 2022-02-04 16:55:19
 -- サーバのバージョン： 5.7.24
 -- PHP のバージョン: 8.0.1
 
@@ -84,6 +84,27 @@ CREATE TABLE `game_table` (
   `position` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- テーブルのデータのダンプ `game_table`
+--
+
+INSERT INTO `game_table` (`id`, `turn`, `user_id`, `dice`, `bonus`, `position`) VALUES
+(1, 1, 1, 4, 0, 4),
+(2, 1, 2, 6, 0, 6),
+(3, 2, 1, 6, 0, 10),
+(4, 2, 2, 3, 0, 9),
+(5, 3, 1, 5, 0, 15),
+(6, 3, 2, 6, 0, 15),
+(7, 4, 1, 0, 0, 15),
+(8, 4, 2, 2, -3, 14),
+(9, 5, 1, 1, 2, 18),
+(10, 5, 2, 5, 0, 19),
+(11, 6, 1, 2, 4, 24),
+(12, 6, 2, 5, 0, 24),
+(13, 7, 1, 3, 0, 27),
+(14, 7, 2, 5, 0, 29),
+(15, 8, 1, 5, 0, 29);
+
 -- --------------------------------------------------------
 
 --
@@ -120,8 +141,8 @@ CREATE TABLE `user_table` (
 --
 
 INSERT INTO `user_table` (`user_id`, `user_name`, `position`, `stop_status`, `goal`) VALUES
-(1, 'ひでゆき', 0, 0, 29),
-(2, 'ゆみえ', 0, 0, 29);
+(1, 'ひでゆき', 29, 0, -3),
+(2, 'ゆみえ', 29, 0, 0);
 
 --
 -- ダンプしたテーブルのインデックス
@@ -159,7 +180,7 @@ ALTER TABLE `boad_table`
 -- テーブルの AUTO_INCREMENT `game_table`
 --
 ALTER TABLE `game_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- テーブルの AUTO_INCREMENT `user_table`
