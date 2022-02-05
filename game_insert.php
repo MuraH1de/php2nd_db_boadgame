@@ -40,7 +40,7 @@
     $turn = intdiv($count_number, $user_all) + 1;
     if($turn == 1){
         $goal = 29;
-        $position = 0;
+        $position = 1;
     }
     else{
         $position = $user_table[$user_id]["position"];
@@ -70,10 +70,14 @@
         $position = 29;
     }
     //echo 'position=>'.$position.'<br />';
-    //$stop_status = $turn_value["stop_status"];
-    $stop_status = 0;
+    $stop_status = $turn_value["stop_status"];
+    //$stop_status = 0;
     //echo 'stop_status=>'.$stop_status.'<br />';
-    $goal = $goal - $dice - $turn_value["bonus"];
+    if($dice == 0){
+        $stop_status = 0;
+    }
+
+    $goal = $goal - $dice - $turn_value["bonus"] - 1;
     if($goal < 0){
         $goal = 0;
     }
