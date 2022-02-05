@@ -70,7 +70,8 @@
         $position = 29;
     }
     //echo 'position=>'.$position.'<br />';
-    $stop_status = $turn_value["stop_status"];
+    //$stop_status = $turn_value["stop_status"];
+    $stop_status = 0;
     //echo 'stop_status=>'.$stop_status.'<br />';
     $goal = $goal - $dice - $turn_value["bonus"];
     if($goal < 0){
